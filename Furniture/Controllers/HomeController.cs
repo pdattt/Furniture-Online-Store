@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Furniture.Models;
 
 namespace Furniture.Controllers
 {
@@ -10,7 +11,9 @@ namespace Furniture.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<Product> products = new FurDAO().SelectALL();
+
+            return View(products);
         }
 
         public ActionResult About()

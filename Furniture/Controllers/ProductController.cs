@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Furniture.Models;
 
 namespace Furniture.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: Product
+        
         public ActionResult Product()
         {
-            return View();
+            List<Product> products = new FurDAO().SelectALL();
+            return View(products);
         }
     }
 }
