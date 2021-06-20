@@ -10,13 +10,13 @@ namespace Furniture.Models
     {
         [Required]
         [StringLength(16)]
-        [MinLength(6, ErrorMessage = "Username should have lenght from 6 to 16 characters!!")]
+        [MinLength(6, ErrorMessage = "Username should has length from 6 to 16 characters!!")]
         public string Username { get; set; }
 
         [DataType(DataType.Password)]
         [Required]
         [StringLength(16)]
-        [MinLength(6, ErrorMessage = "Password should have lenght from 6 to 16 characters!!")]
+        [MinLength(6, ErrorMessage = "Password should has length from 6 to 16 characters!!")]
         public string Password { get; set; }
 
         [Required]
@@ -25,7 +25,7 @@ namespace Furniture.Models
 
         [DataType(DataType.Password)]
         [Required]
-        [Compare("Password", ErrorMessage = "Confirm password is not correct!!")]
+        [Compare("Password")]
         [StringLength(16)]
         public string ConfirmPass { get; set; }
 

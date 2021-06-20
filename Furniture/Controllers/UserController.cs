@@ -46,5 +46,54 @@ namespace Furniture.Controllers
         {
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Login user)
+        {
+            var loginResult = new UserDAO().CheckLogin(user);
+
+            if (ModelState.IsValid)
+            {
+                if (loginResult)
+                {
+                    Session["User"] = user.Username;
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("Username", string.Empty);
+                    ModelState.AddModelError("Password", string.Empty);
+                    ModelState.AddModelError(string.Empty, "Username or password is not correct");
+                }
+            }
+
+            return View(user);
+        }
+
+        public new ActionResult Profile()
+        {
+            
+            if (Session["User"] != null)
+            {
+                string username = Session["User"].ToString();
+
+                User user = new UserDAO().GetDetail(username);
+                return View(user);
+            }
+
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult LogOut()
+        {
+            Session["User"] = null;
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -36,6 +36,27 @@ namespace Furniture.Models
             return false;
         }
 
+        public bool CheckLogin(Login user)
+        {
+            var checkUsername = CheckExist(user.Username);
+
+            if (!checkUsername)
+            {
+                return false;
+            }
+            else
+            {
+                var passCheck = db.Users.Where(x => x.Username == user.Username).Select(x => x.Password).SingleOrDefault();
+
+                if(String.Compare(UserDAO.Encrypt(user.Password), passCheck) != 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public User GetDetail(string username)
         {
             User user = db.Users.Where(x => x.Username == username).SingleOrDefault();
@@ -53,6 +74,5 @@ namespace Furniture.Models
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             return Convert.ToBase64String(passwordBytes);
         }
-
     }
 }
