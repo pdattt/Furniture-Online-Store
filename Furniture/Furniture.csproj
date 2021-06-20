@@ -124,10 +124,11 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FurDAO.cs" />
+    <Compile Include="Models\ProductDAO.cs" />
     <Compile Include="Models\FurnitureDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,6 +170,19 @@
     <Content Include="assets\images\team_01.jpg" />
     <Content Include="assets\js\custom.js" />
     <Content Include="assets\js\owl.js" />
+    <Content Include="assets\product\Chair\01.jpg" />
+    <Content Include="assets\product\Chair\02.jpg" />
+    <Content Include="assets\product\Chair\03.jpg" />
+    <Content Include="assets\product\Chair\04.jpg" />
+    <Content Include="assets\product\Chair\05.jpg" />
+    <Content Include="assets\product\Sofa\01.jpg" />
+    <Content Include="assets\product\Sofa\02.jpg" />
+    <Content Include="assets\product\Sofa\03.jpg" />
+    <Content Include="assets\product\Sofa\04.jpg" />
+    <Content Include="assets\product\Table\01.jpg" />
+    <Content Include="assets\product\Table\02.jpg" />
+    <Content Include="assets\product\Table\03.jpg" />
+    <Content Include="assets\product\Table\04.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -196,7 +210,6 @@
     <None Include="Models\FurnitureDB.dbml.layout">
       <DependentUpon>FurnitureDB.dbml</DependentUpon>
     </None>
-    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -249,7 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Checkout\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

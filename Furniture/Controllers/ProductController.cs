@@ -12,7 +12,7 @@ namespace Furniture.Controllers
         
         public ActionResult Product()
         {
-            List<Product> products = new FurDAO().SelectALL();
+            List<Product> products = new ProductDAO().SelectALL();
             return View(products);
         }
     }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Furniture.Models
 {
-    public class FurDAO
+    public class ProductDAO
     {
         FurnitureDataContext db = new FurnitureDataContext(ConfigurationManager.ConnectionStrings["strCon"].ConnectionString);
         

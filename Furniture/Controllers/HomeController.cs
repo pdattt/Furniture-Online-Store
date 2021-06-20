@@ -11,7 +11,7 @@ namespace Furniture.Controllers
     {
         public ActionResult Index()
         {
-            List<Product> products = new FurDAO().SelectALL();
+            List<Product> products = new ProductDAO().SelectALL();
 
             return View(products);
         }

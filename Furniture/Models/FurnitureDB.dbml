@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="datnguyensa" Class="FurnitureDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=datnguyensa.mssql.somee.com;Initial Catalog=datnguyensa;User ID=pdatsa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="datnguyensaConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=datnguyensa.mssql.somee.com;Initial Catalog=datnguyensa;Persist Security Info=True;User ID=pdatsa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="datnguyensaConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Catalog" Member="Catalogs">
     <Type Name="Catalog">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -36,6 +36,7 @@
       <Column Name="Password" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
       <Column Name="Rold" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="User_Order" Member="Orders" ThisKey="Username" OtherKey="ID_User" Type="Order" />
+      <Association Name="User_UserInfo" Member="UserInfos" ThisKey="Username" OtherKey="Username" Type="UserInfo" />
     </Type>
   </Table>
   <Table Name="dbo.Product" Member="Products">
@@ -50,6 +51,16 @@
       <Column Name="Discount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Product_OrderDetail" Member="OrderDetails" ThisKey="ID" OtherKey="ID_Product" Type="OrderDetail" />
       <Association Name="Catalog_Product" Member="Catalog" ThisKey="ID_Catalog" OtherKey="ID" Type="Catalog" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserInfo" Member="UserInfos">
+    <Type Name="UserInfo">
+      <Column Name="Username" Type="System.String" DbType="VarChar(16) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserInfo" Member="User" ThisKey="Username" OtherKey="Username" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
