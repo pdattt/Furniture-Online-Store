@@ -134,12 +134,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FurnitureDB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\fontawesome.css" />
     <Content Include="assets\css\owl.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\validation.css" />
     <Content Include="assets\fonts\flexslider-icon.svg" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\images\about-1-570x350.jpg" />
@@ -259,12 +262,12 @@
     <Content Include="Views\Home\Testimonials.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
     <Content Include="Views\Home\BlogDetails.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\Checkout\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
