@@ -82,6 +82,10 @@
 
                         foreach (var product in ViewBag.proList)
                         {
+                            if(i >=3)
+                            {
+                                break;
+                            }
                             if (product.ID != Model.ID)
                             {
                                 if (product.ID_Catalog == Model.ID_Catalog)
@@ -92,6 +96,8 @@
                                         </div>
                                         <br>
                                     </div>
+
+                                    i++;
                                 }
                             }
                         }
