@@ -15,5 +15,13 @@ namespace Furniture.Controllers
             List<Product> products = new ProductDAO().SelectALL();
             return View(products);
         }
+
+        public ActionResult ProductDetail(int ID)
+        {
+            ViewBag.proList = new ProductDAO().SelectALL();
+            Product product = new ProductDAO().SelectByID(ID);
+
+            return View(product);
+        }
     }
 }

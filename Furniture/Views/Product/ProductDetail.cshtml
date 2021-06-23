@@ -1,0 +1,208 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+@section Banner{
+    <div class="page-heading about-heading header-text" style="background-image: url('../assets/images/heading-6-1920x500.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <h2>Products</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section navBar{
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container" style="padding-right: 0px;">
+                <a class="navbar-brand" href=@Url.Action("Index", "Home")><h2>Online Store <em>Website</em></h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href=@Url.Action("Index", "Home")>
+                                Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item active"><a class="nav-link" href=@Url.Action("Product", "Product")>Product</a></li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</a>
+
+                            <div class="dropdown-menu active">
+                                <a class="dropdown-item" href=@Url.Action("Blog", "Home")>Blog</a>
+                                <a class="dropdown-item" href=@Url.Action("Testimonials", "Home")>Testimonials</a>
+                                <a class="dropdown-item" href=@Url.Action("Terms", "Home")>Terms</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href=@Url.Action("About", "Home")>About Us</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href=@Url.Action("Contact", "Home")>Contact Us</a></li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href=@Url.Action("Profile", "User")>Profile</a>
+                        </li>
+
+                        <li class="nav-item" style="margin-top: 10px; margin-left: 30px;">
+                            <a href="#">
+                                <span class="lnr lnr-cart">🛒</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+}
+
+<div class="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <div>
+                    <img src=@Url.Content(Model.Image) alt="" class="img-fluid wc-image">
+                </div>
+                <br>
+                <div class="row">
+
+                    @{
+                        int i = 0;
+
+                        foreach (var product in ViewBag.proList)
+                        {
+                            if (product.ID != Model.ID)
+                            {
+                                if (product.ID_Catalog == Model.ID_Catalog)
+                                {
+                                    <div class="col-sm-4 col-xs-6">
+                                        <div>
+                                            <img src=@Url.Content(product.Image) alt="" class="img-fluid">
+                                        </div>
+                                        <br>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-8 col-xs-12">
+                <form action="#" method="post" class="form">
+                    <h2>@Model.Name</h2>
+
+                    <br>
+
+                    <p class="lead">
+                        @{
+                            if (Model.Discount != null)
+                            {
+                                <h6><small><del>@Model.Price.ToString("#,##") </del></small> @((Model.Price - Model.Price * Model.Discount * 0.01).ToString("#,##")) VND </h6>
+                            }
+                            else
+                            {
+                                <h6> @Model.Price.ToString("#,##") VND </h6>
+                            }
+                        }
+                    </p>
+
+                    <br>
+
+                    <p class="lead">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi ratione molestias maxime odio. Provident ratione vero, corrupti, optio laborum aut!
+                    </p>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <label class="control-label">Quantity</label>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="1">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="latest-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Other Products</h2>
+                    <a href=@Url.Action("Product", "Product")>View more <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            @{
+                i = 0;
+
+                foreach (var product in ViewBag.proList)
+                {
+                    if (i >= 3)
+                    { break; }
+
+                    if (product.ID == Model.ID)
+                    { continue; }
+
+                    <div class="col-md-4">
+                        <div class="product-item">
+                            <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><img src=@Url.Content(product.Image) alt=""></a>
+                            <div class="down-content">
+                                <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><h4>@product.Name</h4></a>
+                                @{
+                                    if (product.Discount != null)
+                                    {
+                                        <h6><small><del>@product.Price.ToString("#,##") </del></small> @((product.Price - product.Price * product.Discount * 0.01).ToString("#,##")) VND </h6>
+                                    }
+                                    else
+                                    {
+                                        <h6> @product.Price.ToString("#,##") VND </h6>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    i++;
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-content">
+                    <p>Copyright © 2020 Company Name - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

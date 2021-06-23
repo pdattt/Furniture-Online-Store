@@ -53,10 +53,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href=@Url.Action("Profile", "User")>Profile</a>
-                        </li>
-                            
-                        }
-
+                        </li>      
                         <li class="nav-item" style="margin-top: 10px; margin-left: 30px;">
                             <a href="#">
                                 <span class="lnr lnr-cart">🛒</span>
@@ -80,9 +77,9 @@
                 {
                     <div class="col-md-4">
                         <div class="product-item">
-                            <a href="product-details.html"><img src=@Url.Content(@product.Image) alt=""></a>
+                            <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><img src=@Url.Content(@product.Image) alt=""></a>
                             <div class="down-content">
-                                <a href="product-details.html"><h4> @product.Name </h4></a>
+                                <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><h4> @product.Name </h4></a>
                                 @{
                                     if (product.Discount != null)
                                     {

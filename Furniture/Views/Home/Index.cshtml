@@ -36,7 +36,7 @@
                         <li class="nav-item"><a class="nav-link" href=@Url.Action("Contact", "Home")>Contact Us</a></li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href=@Url.Action("About", "Home")>Profile</a>
+                            <a class="nav-link" href=@Url.Action("Profile", "User")>Profile</a>
                         </li>                       
 
                         <li class="nav-item" style="margin-top: 10px; margin-left: 30px;">
@@ -82,7 +82,7 @@
             <div class="col-md-12">
                 <div class="section-heading">
                     <h2>Featured Products</h2>
-                    <a href="products.html">view more <i class="fa fa-angle-right"></i></a>
+                    <a href=@Url.Action("Index", "Home")>view more <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
 
@@ -98,9 +98,9 @@
 
                     <div class="col-md-4">
                         <div class="product-item">
-                            <a href="product-details.html"><img src=@Url.Content(@product.Image) alt=""></a>
+                            <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><img src=@Url.Content(@product.Image) alt=""></a>
                             <div class="down-content">
-                                <a href="product-details.html"><h4> @product.Name </h4></a>
+                                <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><h4> @product.Name </h4></a>
                                 @{
                                     if (product.Discount != null)
                                     {
@@ -276,7 +276,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="call-to-action">
     <div class="container">
