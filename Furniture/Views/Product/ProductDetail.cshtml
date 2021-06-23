@@ -56,7 +56,7 @@
                         </li>
 
                         <li class="nav-item" style="margin-top: 10px; margin-left: 30px;">
-                            <a href="#">
+                            <a href="@Url.Action("Index", "Cart")">
                                 <span class="lnr lnr-cart">🛒</span>
                             </a>
                         </li>
@@ -82,6 +82,10 @@
 
                         foreach (var product in ViewBag.proList)
                         {
+                            if(i >=3)
+                            {
+                                break;
+                            }
                             if (product.ID != Model.ID)
                             {
                                 if (product.ID_Catalog == Model.ID_Catalog)
@@ -92,6 +96,8 @@
                                         </div>
                                         <br>
                                     </div>
+
+                                    i++;
                                 }
                             }
                         }
@@ -128,17 +134,17 @@
 
                     <div class="row">
                         <div class="col-sm-8">
-                            <label class="control-label">Quantity</label>
+                            <label class="control-label">Quantity:  @Model.Quantity.ToString("#,##") </label>
 
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="1">
+                                        
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <a href="#" class="btn btn-primary btn-block">Add to Cart</a>
+                                    <a href="@Url.Action("AddItem", "Cart", new { ID = Model.ID, Quantity = 1 })" class="btn btn-primary btn-block">Add to Cart</a>
                                 </div>
                             </div>
                         </div>

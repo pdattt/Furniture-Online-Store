@@ -121,6 +121,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -128,7 +129,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\OrderDAO.cs" />
+    <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductDAO.cs" />
     <Compile Include="Models\FurnitureDB.designer.cs">
       <AutoGen>True</AutoGen>
@@ -268,6 +272,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
