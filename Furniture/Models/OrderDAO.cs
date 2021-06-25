@@ -10,5 +10,28 @@ namespace Furniture.Models
     {
         FurnitureDataContext db = new FurnitureDataContext(ConfigurationManager.ConnectionStrings["strCon"].ConnectionString);
 
+        public List<Order> SelectAll()
+        {
+            List<Order> orders = db.Orders.ToList();
+            return orders;
+        }
+
+        public Order AddNew()
+        {
+            Order newOrder = ne
+            return 
+        }
+
+        public bool InsertToDatabase(Order newOrder)
+        {
+            try
+            {
+                db.Orders.InsertOnSubmit(newOrder);
+                db.SubmitChanges();
+            }
+            catch { return false; }
+
+            return true;
+        }
     }
 }

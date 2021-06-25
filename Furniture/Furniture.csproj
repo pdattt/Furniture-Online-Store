@@ -122,17 +122,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDAO.cs" />
-    <Compile Include="Models\OrderModels.cs" />
+    <Compile Include="Models\OrderDetailDAO.cs" />
     <Compile Include="Models\ProductDAO.cs" />
     <Compile Include="Models\FurnitureDB.designer.cs">
       <AutoGen>True</AutoGen>

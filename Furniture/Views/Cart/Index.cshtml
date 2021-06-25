@@ -1,4 +1,4 @@
-﻿@model List<Furniture.Models.Item>
+﻿
 @{
     ViewBag.Title = "Index";
 }
@@ -124,7 +124,7 @@
 
                 <div style="float:right" class="text-right">
                     <hr />
-                    <span style="font-size:medium"><b style="color:red">Total Cost: @Model.Sum(x => (x.Product.Price * x.Quantity))$</b></span>
+                    @*<span style="font-size:medium"><b style="color:red">Total Cost: @Model.Sum(x => (x.Product.Price * x.Quantity))$</b></span>*@
                     <button class="button" id="btnPayment">Payment</button>
                 </div>
             }

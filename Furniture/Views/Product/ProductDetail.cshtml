@@ -134,17 +134,11 @@
 
                     <div class="row">
                         <div class="col-sm-8">
-                            <label class="control-label">Quantity:  @Model.Quantity.ToString("#,##") </label>
+                            <label class="control-label">Quantity:  @Model.Quantity.ToString() </label>
 
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <a href="@Url.Action("AddItem", "Cart", new { ID = Model.ID, Quantity = 1 })" class="btn btn-primary btn-block">Add to Cart</a>
+                                    <a href="@Url.Action("AddToCart", "Cart", new { ID = Model.ID, Quantity = 1 })" class="btn btn-primary btn-block">Add to Cart</a>
                                 </div>
                             </div>
                         </div>
