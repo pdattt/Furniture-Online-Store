@@ -33,7 +33,8 @@ namespace Furniture.Models
                     }
                 }
 
-                ID = list.Max(x => x.ID);
+                if(list.Count > 0)
+                    ID = list.Max(x => x.ID);
             }
 
             OrderDetail newDetail = new OrderDetail
