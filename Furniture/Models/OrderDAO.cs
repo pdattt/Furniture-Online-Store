@@ -16,12 +16,6 @@ namespace Furniture.Models
             return orders;
         }
 
-        public Order AddNew()
-        {
-            Order newOrder = ne
-            return 
-        }
-
         public bool InsertToDatabase(Order newOrder)
         {
             try

@@ -10,41 +10,66 @@ namespace Furniture.Models
     {
         FurnitureDataContext db = new FurnitureDataContext(ConfigurationManager.ConnectionStrings["strCon"].ConnectionString);
 
-        List<OrderDetail> list;
-
-        public OrderDetailDAO()
+        public List<OrderDetail> AddNew(Product product, List<OrderDetail> list)
         {
-            list = new List<OrderDetail>();
-        }
+            int ID = 0;
 
-        public void AddNew(Product product)
-        {
-            OrderDetail detail = new OrderDetail();
-
-            if (new ProductDAO().SelectByID(product.ID) != null)
-            {
-                detail.ID_Product = product.ID;
-                detail.Price = product.Price;
-                detail.Quantity = 1;
-                detail.TotalPrice = detail.Quantity * detail.Price;
-
-                list.Add(detail);
-            }
+            if (list == null)
+                list = new List<OrderDetail>();
             else
             {
-                for(int i = 0; i < list.Count; i++)
+                bool checkExists = list.Any(x => x.ID_Product == product.ID);
+
+                if (checkExists)
                 {
-                    if(product.ID == list[i].ID_Product)
+                    foreach (var detail in list)
                     {
-                        list[i].Quantity += 1;
-                        detail.TotalPrice = detail.Quantity * detail.Price;
+                        if (detail.ID_Product == product.ID)
+                        {
+                            detail.Quantity++;
+                            detail.TotalPrice = detail.Price * detail.Quantity;
+                            return list;
+                        }
                     }
                 }
+
+                ID = list.Max(x => x.ID);
             }
+
+            OrderDetail newDetail = new OrderDetail
+            {
+                ID = ID + 1,
+                ID_Product = product.ID,
+                Name = product.Name,
+                Image = product.Image,
+                Quantity = 1,
+                Price = (int)(product.Price - product.Price * product.Discount * 0.01),
+                TotalPrice = (int)product.Price
+            };
+
+            list.Add(newDetail);
+
+            return list;
         }
 
         public List<OrderDetail> SelectAll()
         {
+            List<OrderDetail> list = db.OrderDetails.ToList();
+
+            return list;
+        }
+
+        public OrderDetail SelectByID(int ID, List<OrderDetail> list)
+        {
+            OrderDetail order = list.Where(x => x.ID == ID).SingleOrDefault();
+
+            return order;
+        }
+
+        public List<OrderDetail> Delete(OrderDetail order, List<OrderDetail> list)
+        {
+            list.Remove(order);
+
             return list;
         }
     }

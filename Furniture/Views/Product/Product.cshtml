@@ -81,7 +81,7 @@
                             <div class="down-content">
                                 <a href=@Url.Action("ProductDetail", "Product", new { ID = product.ID })><h4> @product.Name </h4></a>
                                 @{
-                                    if (product.Discount != null)
+                                    if (product.Discount != 0)
                                     {
                                         <h6><small><del>@product.Price.ToString("#,##") </del></small> @((product.Price - product.Price * product.Discount * 0.01).ToString("#,##")) VND </h6>
                                     }
