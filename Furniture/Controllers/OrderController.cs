@@ -62,6 +62,19 @@ namespace Furniture.Controllers
 
             return RedirectToAction("Cart");
         }
+
+        public ActionResult DeleteAll()
+        {
+            Session["Order"] = null;
+
+            return RedirectToAction("Cart");
+        }
+
+        public ActionResult Checkout()
+        {
+
+            return View();
+        }
     }
 
 }

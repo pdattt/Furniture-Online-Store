@@ -14,7 +14,7 @@ namespace Furniture.Models
         {
             int ID = 0;
 
-            if (list == null)
+            if (list == null || list.Count == 0)
                 list = new List<OrderDetail>();
             else
             {

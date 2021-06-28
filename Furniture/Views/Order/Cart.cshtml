@@ -83,7 +83,9 @@
             }
             else
             {
-                using (Html.BeginForm("Update", "Order", FormMethod.Post, new { @style = "width: 960px; "}))
+                int total = 0;
+
+                using (Html.BeginForm("Update", "Order", FormMethod.Post, new { @style = "width: 960px; " }))
                 {
                     <table id="table" class="align-content-lg-center">
                         <thead>
@@ -111,18 +113,31 @@
                                         <a href="@Url.Action("RemoveFromCart", "Order", new { ID = order.ID })" class="deleteItem" data-id="@order.ID" style="color:red" onclick="return confirm('Are you sure to delete this item?')">Delete</a>
                                     </td>
                                 </tr>
+
+                                total += order.Price * order.Quantity;
                             }
                         </tbody>
                     </table>
 
                     <br />
 
+                    <div class=" row">
+                        <div class="col-6">
+                            <strong style="margin-left:30px;">Total</strong>
+                        </div>
+
+                        <div class="col-6 text-right">
+                            <strong style="margin-right: 100px;">@total.ToString("#,##") VND </strong>
+                        </div>
+                    </div>
+
+                    <br />
+
                     <div style="float: left; margin-top: 20px;">
                         <a href=@Url.Action("Index", "Home") class="button">Continue Shopping</a>
-                        <input class="button" type ="submit" id="btnUpdate" value="Update">
-                        <button class="button" id="btnDeleteAll" onclick="return confirm('Are you sure to delete all item?')">Delete All</button>
-                        @*<span style="font-size:medium"><b style="color:red">Total Cost: @Model.Sum(x => (x.Product.Price * x.Quantity))$</b></span>*@
-                        <button class="button" id="btnPayment">Payment</button>
+                        <input class="button" type="submit" id="btnUpdate" value="Update">
+                        <a href=@Url.Action("DeleteAll", "Order") class="button" onclick="return confirm('Are you sure to delete all item?')">Delete All</a>
+                        <a href=@Url.Action("Checkout", "Order") class="button">Checkout</a>
                     </div>
                 }
             }
