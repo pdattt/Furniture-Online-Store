@@ -10,66 +10,26 @@ namespace Furniture.Models
     {
         FurnitureDataContext db = new FurnitureDataContext(ConfigurationManager.ConnectionStrings["strCon"].ConnectionString);
 
-        public List<OrderDetail> AddNew(Product product, List<OrderDetail> list)
+        public void AddNew(OrderDetail detail)
         {
-            int ID = 0;
-
-            if (list == null || list.Count == 0)
-                list = new List<OrderDetail>();
-            else
-            {
-                bool checkExists = list.Any(x => x.ID_Product == product.ID);
-
-                if (checkExists)
-                {
-                    foreach (var detail in list)
-                    {
-                        if (detail.ID_Product == product.ID)
-                        {
-                            detail.Quantity++;
-                            detail.TotalPrice = detail.Price * detail.Quantity;
-                            return list;
-                        }
-                    }
-                }
-
-                if(list.Count > 0)
-                    ID = list.Max(x => x.ID);
-            }
-
             OrderDetail newDetail = new OrderDetail
             {
-                ID = ID + 1,
-                ID_Product = product.ID,
-                Name = product.Name,
-                Image = product.Image,
-                Quantity = 1,
-                Price = (int)(product.Price - product.Price * product.Discount * 0.01),
-                TotalPrice = (int)product.Price
+                ID_Order = detail.ID_Order,
+                ID_Product = detail.ID,
+                Name = detail.Name,
+                Image = detail.Image,
+                Quantity = detail.Quantity,
+                Price = detail.Price,
+                TotalPrice = detail.TotalPrice
             };
 
-            list.Add(newDetail);
-
-            return list;
+            db.OrderDetails.InsertOnSubmit(newDetail);
+            db.SubmitChanges();
         }
 
-        public List<OrderDetail> SelectAll()
+        public List<OrderDetail> SelectAll(int ID_Order)
         {
-            List<OrderDetail> list = db.OrderDetails.ToList();
-
-            return list;
-        }
-
-        public OrderDetail SelectByID(int ID, List<OrderDetail> list)
-        {
-            OrderDetail order = list.Where(x => x.ID == ID).SingleOrDefault();
-
-            return order;
-        }
-
-        public List<OrderDetail> Delete(OrderDetail order, List<OrderDetail> list)
-        {
-            list.Remove(order);
+            List<OrderDetail> list = db.OrderDetails.Where(x => x.ID_Order == ID_Order).ToList();
 
             return list;
         }

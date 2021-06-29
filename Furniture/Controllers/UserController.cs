@@ -77,12 +77,14 @@ namespace Furniture.Controllers
 
         public new ActionResult Profile()
         {
-            
             if (Session["User"] != null)
             {
                 string username = Session["User"].ToString();
 
                 User user = new UserDAO().GetDetail(username);
+                List<Order> history = new OrderDAO().SelectByID(username);
+                ViewBag.history = history;
+
                 return View(user);
             }
 
@@ -94,6 +96,17 @@ namespace Furniture.Controllers
             Session["User"] = null;
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult HistoryDetail(int ID = 0)
+        {
+            if (Session["User"] != null)
+            {
+                List<OrderDetail> list = new OrderDetailDAO().SelectAll(ID);
+                return View(list);
+            }
+
+            return RedirectToAction("Login");
         }
     }
 }

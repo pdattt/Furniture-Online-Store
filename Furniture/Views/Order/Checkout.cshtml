@@ -41,7 +41,7 @@
                         </li>
 
                         <li class="nav-item" style="margin-top: 10px; margin-left: 30px;">
-                            <a href="@Url.Action("Index", "Cart")">
+                            <a href=@Url.Action("Cart", "Order")>
                                 <span class="lnr lnr-cart">🛒</span>
                             </a>
                         </li>
@@ -67,198 +67,130 @@
     </div>
 }
 
-<div class="products call-to-action">
+<div class="products">
     <div class="container">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-6">
-                        <em>Sub-total</em>
-                    </div>
+        <h4 style="margin-left:10px;"> <b>User Information</b></h4>
+        <br /> <br />
 
-                    <div class="col-6 text-right">
-                        <strong>$ 128.00</strong>
-                    </div>
+        @{
+            var user = ViewBag.user;
+        }
+
+        <div class="col col_13 checkout">
+            <h5 style="width:400px;"> <b>Full name: </b> @user.FullName </h5>
+            <br />
+            <h5 style="width:400px;"> <b>Address: </b> @user.Address </h5>
+            <br />
+            <h5 style="width:400px;"> <b>Phone number: </b> @user.Phone </h5>
+            <br />
+        </div>
+
+        <br />
+
+        <div class="row">
+            <h4 style="margin-left:10px; margin-bottom: 10px;"> <b>Cart Information</b></h4>
+            @if (Model == null || Model.Count == 0)
+            {
+                <br />
+                <h3>You do not have any products in your Shopping Cart.</h3>
+            }
+            else
+            {
+                int total = 0;
+                <table id="table" class="align-content-lg-center">
+                    <thead>
+                        <tr>
+                            <td><b>ID Product</b></td>
+                            <td><b>Image</b></td>
+                            <td><b>Name Product</b></td>
+                            <td><b>Quantity</b></td>
+                            <td><b>Price</b></td>
+                            <td><b>Total Price</b></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.ID_Product</td>
+                                <td><img style="width:120px; height:80px" src=@Url.Content(order.Image) /></td>
+                                <td>@order.Name</td>
+                                <td>@order.Quantity </td>
+                                <td>@order.Price.ToString("#,##") VND</td>
+                                <td>@((order.Price * order.Quantity).ToString("#,##")) VND</td>
+                            </tr>
+
+                            total += order.Price * order.Quantity;
+                        }
+                    </tbody>
+                </table>
+
+                <br />
+                <div class="col-6" style="margin-top: 20px;">
+                    <strong style="margin-left:30px;">Total</strong>
                 </div>
-            </li>
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-6">
-                        <em>Extra</em>
-                    </div>
-
-                    <div class="col-6 text-right">
-                        <strong>$ 0.00</strong>
-                    </div>
+                <div class="col-6 text-right" style="margin-top: 20px;">
+                    <strong style="margin-right: 30px;">@total.ToString("#,##") VND </strong>
                 </div>
-            </li>
+                <br />
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-6">
-                        <em>Tax</em>
-                    </div>
+                <style>
+                    a {
+                        cursor: pointer;
+                    }
 
-                    <div class="col-6 text-right">
-                        <strong>$ 10.00</strong>
-                    </div>
-                </div>
-            </li>
+                    h3 {
+                        font-size: medium;
+                        text-align: center;
+                        color: red
+                    }
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-6">
-                        <em>Total</em>
-                    </div>
+                    .input {
+                        width: 100%
+                    }
 
-                    <div class="col-6 text-right">
-                        <strong>$ 138.00</strong>
-                    </div>
-                </div>
-            </li>
+                    #table {
+                        font-family: Arial, Helvetica, sans-serif;
+                        border-collapse: collapse;
+                        width: 100%;
+                        text-align: center
+                    }
 
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-6">
-                        <em>Deposit payment required</em>
-                    </div>
+                        #table td, #table th {
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                        }
 
-                    <div class="col-6 text-right">
-                        <strong>$ 20.00</strong>
-                    </div>
-                </div>
-            </li>
-        </ul>
+                        #table th {
+                            padding-top: 12px;
+                            padding-bottom: 12px;
+                            text-align: left;
+                            background-color: #4CAF50;
+                            color: white;
+                        }
 
-        <br>
+                    .button {
+                        background-color: #128EB5;
+                        border: none;
+                        color: white;
+                        padding: 5px 15px;
+                        text-align: center;
+                        font-size: 16px;
+                        cursor: pointer;
+                    }
+                </style>
+            }
+        </div>
+    </div>
 
-        <div class="inner-content">
-            <div class="contact-form">
-                <form action="#">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Title:</label>
-                                <select class="form-control" data-msg-required="This field is required.">
-                                    <option value="">-- Choose --</option>
-                                    <option value="dr">Dr.</option>
-                                    <option value="miss">Miss</option>
-                                    <option value="mr">Mr.</option>
-                                    <option value="mrs">Mrs.</option>
-                                    <option value="ms">Ms.</option>
-                                    <option value="other">Other</option>
-                                    <option value="prof">Prof.</option>
-                                    <option value="rev">Rev.</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Name:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Email:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Phone:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Address 1:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Address 2:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">City:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">State:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Zip:</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Country:</label>
-                                <select class="form-control">
-                                    <option value="">-- Choose --</option>
-                                    <option value="">-- Choose --</option>
-                                    <option value="">-- Choose --</option>
-                                    <option value="">-- Choose --</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+    <br/>
 
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Payment method</label>
-
-                                <select class="form-control">
-                                    <option value="">-- Choose --</option>
-                                    <option value="bank">Bank account</option>
-                                    <option value="cash">Cash</option>
-                                    <option value="paypal">PayPal</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label">Captcha</label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label">
-                            <input type="checkbox">
-
-                            I agree with the <a href="terms.html" target="_blank">Terms &amp; Conditions</a>
-                        </label>
-                    </div>
-
-                    <div class="clearfix">
-                        <button type="button" class="filled-button pull-left">Back</button>
-
-                        <button type="submit" class="filled-button pull-right">Finish</button>
-                    </div>
-                </form>
-            </div>
+    <div class="contact-form">
+        <div class="clearfix" style="margin-right: 200px;">
+            <a href=@Url.Action("Finish", "Order") class="filled-button pull-right">Checkout</a>
+            <a href=@Url.Action("Cart", "Order") class="filled-button pull-right" style="margin-right: 20px;">Update Order</a>
         </div>
     </div>
 </div>

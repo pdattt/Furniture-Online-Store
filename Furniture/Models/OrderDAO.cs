@@ -16,16 +16,28 @@ namespace Furniture.Models
             return orders;
         }
 
-        public bool InsertToDatabase(Order newOrder)
+        public void AddNew(Order newOrder)
         {
-            try
-            {
-                db.Orders.InsertOnSubmit(newOrder);
-                db.SubmitChanges();
-            }
-            catch { return false; }
+            db.Orders.InsertOnSubmit(newOrder);
+            db.SubmitChanges();
+        }
 
-            return true;
+        public int GenerateID()
+        {
+            List<Order> list = db.Orders.ToList();
+
+            if (list == null || list.Count == 0)
+                return 0;
+
+            int ID = list.Max(x => x.ID);
+            return ID;
+        }
+
+        public List<Order> SelectByID(string userID)
+        {
+            List<Order> list = db.Orders.Where(x => x.ID_User == userID).ToList();
+
+            return list;
         }
     }
 }

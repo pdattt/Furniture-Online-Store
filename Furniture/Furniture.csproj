@@ -128,6 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\OrderDAO.cs" />
     <Compile Include="Models\OrderDetailDAO.cs" />
@@ -271,6 +272,8 @@
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Order\Cart.cshtml" />
+    <Content Include="Views\Order\Finish.cshtml" />
+    <Content Include="Views\User\HistoryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

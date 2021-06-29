@@ -26,7 +26,7 @@ namespace Furniture.Controllers
             var list = (List<OrderDetail>)sessionList;
             Product product = new ProductDAO().SelectByID(ID); 
 
-            list = new OrderDetailDAO().AddNew(product, list);
+            list = new Cart().AddNew(product, list);
 
             Session["Order"] = list;
 
@@ -37,9 +37,9 @@ namespace Furniture.Controllers
         {
             var sessionList = Session["Order"];
             var list = (List<OrderDetail>)sessionList;
-            OrderDetail order = new OrderDetailDAO().SelectByID(ID, list);
+            OrderDetail order = new Cart().SelectByID(ID, list);
 
-            list = new OrderDetailDAO().Delete(order, list);
+            list = new Cart().Delete(order, list);
 
             Session["Order"] = list;
 
@@ -72,6 +72,51 @@ namespace Furniture.Controllers
 
         public ActionResult Checkout()
         {
+            if (Session["User"] == null)
+                return RedirectToAction("Login", "User");
+
+            var sessionUser = Session["User"].ToString();
+            User user = new UserDAO().GetDetail(sessionUser);
+            ViewBag.user = user;
+
+            var sessionList = Session["Order"];
+            var list = (List<OrderDetail>)sessionList;
+
+            return View(list);
+        }
+
+        public ActionResult Finish()
+        {
+            var sessionList = Session["Order"];
+            var list = (List<OrderDetail>)sessionList;
+
+            if (list == null || list.Count == 0)
+                return View("Cart");
+
+            var userID = Session["User"].ToString();
+            
+            if(userID == null)
+                return View("Cart");
+
+            int totalPrice = new Cart().countTotalPrice(list);
+
+            Order newOrder = new Order
+            {
+                ID = new OrderDAO().GenerateID(),
+                ID_User = userID,
+                TotalPrice = totalPrice,
+                DateCreate = DateTime.Now
+            };
+
+            new OrderDAO().AddNew(newOrder);
+
+            foreach(var detail in list)
+            {
+                detail.ID_Order = newOrder.ID;
+                new OrderDetailDAO().AddNew(detail);
+            }
+
+            Session["Order"] = null;
 
             return View();
         }
